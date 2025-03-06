@@ -15,8 +15,8 @@ namespace GridSagaPrototype
         private int MovementCost = 1;
         private Characters Character;
 
-        public ref Characters getCharacters() {return ref Character;}
-        public void setCharacters(Characters newCharacter) {Character = newCharacter;}
+        public ref Characters getCharacters() { return ref Character; }
+        public void setCharacters(Characters newCharacter) { Character = newCharacter; }
 
         public void setColor(Color backgroundColor) { backColor = backgroundColor; }
         public Color getBackColor() { return backColor; }
