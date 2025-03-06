@@ -15,6 +15,7 @@ namespace GridSagaPrototype
     {
         Panel gridMap = new Panel();
         Button[,] buttons = new Button[10, 10];
+        Map map = new Map(10,10);
         public MainGame()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace GridSagaPrototype
                     buttons[i, j].Location = new Point((buttons[i, j].Parent.Width / buttons.GetLength(1)) * j, (buttons[i, j].Parent.Height / buttons.GetLength(0)) * i);
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
                     buttons[i, j].BackColor = Color.Green;
+                    buttons[i, j].Tag = new int[] { i, j }; 
                     buttons[i, j].Click += on_click;
 
                 }
@@ -98,14 +100,17 @@ namespace GridSagaPrototype
         private void on_click(object sender, EventArgs e)
         {
             Button button = (sender as Button);
-            if (button.BackColor == Color.White)
+            if (button.BackColor == Color.Green)
             {
                 button.BackColor = Color.Pink;
             }
             else if (button.BackColor == Color.Pink)
             {
-                button.BackColor = Color.White;
+                button.BackColor = Color.Green;
             }
+            int[] pos = button.Tag as int[]; //saves the position of the button clicked
+
         }
+
     }
 }

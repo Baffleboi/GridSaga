@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Characters.cs" />
     <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,6 +59,7 @@
     <Compile Include="MainGame.Designer.cs">
       <DependentUpon>MainGame.cs</DependentUpon>
     </Compile>
+    <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SettingsMenu.cs">
@@ -72,6 +74,7 @@
     <Compile Include="ShopMenu.Designer.cs">
       <DependentUpon>ShopMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tile.cs" />
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
