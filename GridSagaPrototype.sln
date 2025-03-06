@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35013.160
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridSagaPrototype", "GridSagaPrototype\GridSagaPrototype.csproj", "{3BA57A16-6849-4553-B7C8-8E24629B6D93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3BA57A16-6849-4553-B7C8-8E24629B6D93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BA57A16-6849-4553-B7C8-8E24629B6D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BA57A16-6849-4553-B7C8-8E24629B6D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BA57A16-6849-4553-B7C8-8E24629B6D93}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {551AF9C2-DA91-4865-B132-1BA62CA4DE54}
+	EndGlobalSection
+EndGlobal
