@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GridSagaPrototype
 {
-    public partial class MainGame : Form
+    public partial class MainGame : Form //This class  has all of the code for the visual aspect of the button grid as well as passing through any necessary code
     {
         Panel gridMap = new Panel();
         Button[,] buttons = new Button[10, 10];
@@ -109,7 +109,6 @@ namespace GridSagaPrototype
                 button.BackColor = Color.Green;
             }
             int[] pos = button.Tag as int[]; //saves the position of the button clicked
-
         }
 
     }

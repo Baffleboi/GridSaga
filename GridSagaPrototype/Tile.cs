@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace GridSagaPrototype
 {
-    internal class Tile
+    internal class Tile //This class holds the properties of each Tile of the Map
     {
+        public Tile(int x, int y)
+        {
 
+        }
 
         private Color backColor = Color.Green; 
         private int MovementCost = 1;

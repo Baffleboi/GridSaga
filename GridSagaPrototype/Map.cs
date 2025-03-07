@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace GridSagaPrototype
 {
-    internal class Map
+    internal class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
-        private Tile[,] TileArray;
+        private List<Tile> TileArray = new List<Tile>();
         public Map(int width, int height)
         {
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    TileArray[i, j] = new Tile();
+                    TileArray.Add(new Tile(i,j));
                 }
             }
         }
