@@ -9,17 +9,16 @@ namespace GridSagaPrototype
 {
     internal class Tile //This class holds the properties of each Tile of the Map
     {
-        public Tile(int x, int y)
-        {
-
-        }
+        int x;
+        int y;
+        public Tile(int i, int j) { x = i; y = j; }
 
         private Color backColor = Color.Green; 
         private int MovementCost = 1;
-        private Characters Character;
+        private Characters Entity;
 
-        public ref Characters getCharacters() { return ref Character; }
-        public void setCharacters(Characters newCharacter) { Character = newCharacter; }
+        public ref Characters getEntity() { return ref Entity; }
+        public void setEntity(Characters newEntity) { Entity = newEntity; }
 
         public void setColor(Color backgroundColor) { backColor = backgroundColor; }
         public Color getBackColor() { return backColor; }

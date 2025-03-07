@@ -37,7 +37,9 @@ namespace GridSagaPrototype
 
         private void achievementBtn_Click(object sender, EventArgs e)
         {
-
+            var AchievementMenu = new AchievementMenu();
+            AchievementMenu.Show();
+            this.Hide();
         }
 
         private void settingsBtn_Click(object sender, EventArgs e)

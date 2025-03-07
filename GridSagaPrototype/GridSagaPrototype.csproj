@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AchievementMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AchievementMenu.Designer.cs">
+      <DependentUpon>AchievementMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Characters.cs" />
     <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
@@ -75,6 +81,9 @@
       <DependentUpon>ShopMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Tile.cs" />
+    <EmbeddedResource Include="AchievementMenu.resx">
+      <DependentUpon>AchievementMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HomePage.resx">
       <DependentUpon>HomePage.cs</DependentUpon>
     </EmbeddedResource>
