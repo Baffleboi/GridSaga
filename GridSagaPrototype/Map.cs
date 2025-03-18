@@ -8,7 +8,7 @@ namespace GridSagaPrototype
 {
     internal class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
-        private Tile[,] TileArray; //
+        private Tile[,] TileArray;
         public Map(int width, int height)
         {
             TileArray = new Tile[width, height];
