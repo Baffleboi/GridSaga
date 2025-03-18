@@ -16,10 +16,14 @@ namespace GridSagaPrototype
             {
                 for (int j = 0; j < height; j++)
                 {
-                    TileArray[i, j] = new Tile();
+                    TileArray[i, j] = new Tile(i,j);
                 }
             }
         }
+        public void Moves(int row, int column)
+        {
+
+        }  
     }
 }
 

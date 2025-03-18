@@ -53,6 +53,7 @@
       <DependentUpon>AchievementMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="Characters.cs" />
+    <Compile Include="Globals.cs" />
     <Compile Include="HomePage.cs">
       <SubType>Form</SubType>
     </Compile>

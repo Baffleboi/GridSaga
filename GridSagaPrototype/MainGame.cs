@@ -100,14 +100,6 @@ namespace GridSagaPrototype
         private void on_click(object sender, EventArgs e)
         {
             Button button = (sender as Button);
-            if (button.BackColor == Color.Green)
-            {
-                button.BackColor = Color.Pink;
-            }
-            else if (button.BackColor == Color.Pink)
-            {
-                button.BackColor = Color.Green;
-            }
             int[] pos = button.Tag as int[]; //saves the position of the button clicked
         }
 
