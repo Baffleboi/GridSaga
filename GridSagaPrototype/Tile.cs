@@ -14,15 +14,17 @@ namespace GridSagaPrototype
         public int distance;
         public Tile(int i, int j, int movementcost) { xCoord = i; yCoord = j; distance = movementcost; }
 
-        private Color backColor = Color.Green; 
+        private Color tileColor = Color.Green; 
         private int MovementCost = 1;
         private Characters Entity;
 
         public ref Characters getEntity() { return ref Entity; }
         public void setEntity(Characters newEntity) { Entity = newEntity; }
 
-        public void setColor(Color backgroundColor) { backColor = backgroundColor; }
-        public Color getBackColor() { return backColor; }
+        public void setTileColor(Color backgroundColor) { tileColor = backgroundColor; }
+        public Color getTileColor() { return tileColor; }
+
+        
 
         public void setMovementCost(int cost) { MovementCost = cost; }
         public int getMovementCost() { return MovementCost; }

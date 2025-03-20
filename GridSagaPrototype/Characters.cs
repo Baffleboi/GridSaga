@@ -14,7 +14,26 @@ namespace GridSagaPrototype
         private int Attack;
         private int Speed;
         private Image Sprite;
+        private int xpos;
+        private int ypos;
+        public Characters(int newHealth, int newAttack, int newSpeed,int startingPosX, int startingPosY, Image newSprite) { Health = newHealth; Attack = newAttack; Speed = newSpeed; Sprite = newSprite; xpos = startingPosX; ypos = startingPosY; }
+        
+        public int getXPos()
+        {
+            return xpos;
+        }
+        public int getYPos()
+        {
+            return ypos;
+        }
 
-        public Characters(int newHealth, int newAttack, int newSpeed, Image newSprite) { Health = newHealth; Attack = newAttack; Speed = newSpeed; Sprite = newSprite; }
+        public void setXPos(int newXPos)
+        {
+            xpos = newXPos;
+        }
+        public void setYPos(int newYPos)
+        {
+            ypos = newYPos;
+        }
     }
 }

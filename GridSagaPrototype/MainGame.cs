@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GridSagaPrototype.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,9 @@ namespace GridSagaPrototype
         public Button[,] buttons = new Button[10, 10];
         public Button[,] getButtons() { return buttons; }
         public Map map = new Map(10,10,1);
+
+        Characters playerOne = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite);
+
         public MainGame()
         {
             InitializeComponent();
@@ -94,7 +98,18 @@ namespace GridSagaPrototype
                     buttons[i, j].Size = new Size(buttons[i, j].Parent.Width / buttons.GetLength(1), buttons[i, j].Parent.Height / buttons.GetLength(0));
 
                     buttons[i, j].Location = new Point((buttons[i, j].Parent.Width / buttons.GetLength(1)) * j, (buttons[i, j].Parent.Height / buttons.GetLength(0)) * i);
+                    buttons[i, j].BackColor = map.getTile(i,j).getTileColor();
+                    buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
                 }
+            }
+            if (Globals.LastPosition[0] < buttons.GetLength(0) && Globals.LastPosition[1] < buttons.GetLength(1))
+            {
+                buttons[Globals.LastPosition[0], Globals.LastPosition[1]].BackColor = Color.Orange;
+            }
+
+            if (playerOne.getXPos() < buttons.GetLength(0) && playerOne.getYPos() < buttons.GetLength(1)) 
+            {
+                buttons[playerOne.getXPos(), playerOne.getYPos()].BackgroundImage = Resources.CharacterOneSprite;
             }
         }
 
@@ -102,6 +117,13 @@ namespace GridSagaPrototype
         {
             Button button = (sender as Button);
             int[] pos = button.Tag as int[]; //saves the position of the button clicked
+            map.moveSearch(pos[0], pos[1]);
+            //-----------------------
+            //Getting the list code goes here
+            //-----------------------
+            Globals.LastPosition = pos;
+
+            ResizeOnStart();
         }
 
     }

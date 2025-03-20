@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,26 +11,32 @@ namespace GridSagaPrototype
 {
     public partial class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
-        Button[,] gridButtons = new Button[10, 10];
-        private Tile[,,] TileArray;
+        //Button[,] gridButtons = new Button[10, 10];
+        private Tile[,] TileArray;
         private static int[] MovementOptionsX = { 1, -1, 0, 0 };
         private static int[] MovementOptionsY = { 0, 0, 1, -1 };
-        public Map(int width, int height, int setDistance = 0)
+        public Map(int width, int height, int cost)
         {
+
+            TileArray = new Tile[width, height];
             List<int[]> possibleMoves = new List<int[]>(); //a list of possible moves
-            TileArray = new Tile[width, height, setDistance + 1];
+            //TileArray[width,height] = new Tile(width, height, cost);
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
                 {
-                    TileArray[i, j, setDistance] = new Tile(i, j, setDistance);
+                    TileArray[i, j] = new Tile(i, j, cost);
+
                 }
             }
         }
-        public void Moves(int row, int column) 
+        public void Moves(int row, int column)
         {
 
-        }  
+        }
+
+        public ref Tile getTile(int i, int j) { return ref TileArray[i, j]; }
+
         public void moveSearch(int startX, int startY) //dijkstra with a move limit
         {
             Queue<Tile> queue = new Queue<Tile>();
@@ -46,23 +53,25 @@ namespace GridSagaPrototype
 
                 if (moves >= 3)
                 {
-                    continue;
+                    break;
                 }
+                else
 
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < 4; i++)
                 {
                     int newXCoord = x + MovementOptionsX[i];
                     int newYCoord = y + MovementOptionsY[i];
 
                     if (!visitedTiles[newXCoord, newYCoord])
                     {
-                        gridButtons[x,y];
                         visitedTiles[newXCoord, newYCoord] = true;
                         queue.Enqueue(new Tile(newXCoord, newYCoord, moves + 1));
                     }
                 }
             }
         }
+
+       
     }
 }
 
