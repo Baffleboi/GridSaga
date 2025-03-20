@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GridSagaPrototype
 {
-    internal class Characters //This class stores all information on Characters (Friendly, Enemies and Obstacles)
+    public partial class Characters //This class stores all information on Characters (Friendly, Enemies and Obstacles)
     {
         private int Health;
         private int Attack;
