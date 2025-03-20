@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GridSagaPrototype
 {
     public partial class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
+        Button[,] gridButtons = new Button[10, 10];
         private Tile[,,] TileArray;
-        int speed = 3;
+        private static int[] MovementOptionsX = { 1, -1, 0, 0 };
+        private static int[] MovementOptionsY = { 0, 0, 1, -1 };
         public Map(int width, int height, int setDistance = 0)
         {
             List<int[]> possibleMoves = new List<int[]>(); //a list of possible moves
@@ -27,7 +30,7 @@ namespace GridSagaPrototype
         {
 
         }  
-        public void moveSearch(int startX, int startY)
+        public void moveSearch(int startX, int startY) //dijkstra with a move limit
         {
             Queue<Tile> queue = new Queue<Tile>();
             queue.Enqueue(new Tile(startX, startY, 1));
@@ -44,6 +47,19 @@ namespace GridSagaPrototype
                 if (moves >= 3)
                 {
                     continue;
+                }
+
+                for (int i = 0; i < 9; i++)
+                {
+                    int newXCoord = x + MovementOptionsX[i];
+                    int newYCoord = y + MovementOptionsY[i];
+
+                    if (!visitedTiles[newXCoord, newYCoord])
+                    {
+                        gridButtons[x,y];
+                        visitedTiles[newXCoord, newYCoord] = true;
+                        queue.Enqueue(new Tile(newXCoord, newYCoord, moves + 1));
+                    }
                 }
             }
         }
