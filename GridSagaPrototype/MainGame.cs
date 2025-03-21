@@ -33,7 +33,6 @@ namespace GridSagaPrototype
 
 
             this.SizeChanged += ResizeGrid; //Resize the grid whenever the window is resized
-            gridMap.BackColor = Color.Black;
             this.Controls.Add(gridMap);
 
 
