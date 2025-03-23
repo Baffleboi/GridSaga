@@ -32,7 +32,7 @@ namespace GridSagaPrototype
             this.FormClosed += closed; //Calls upon a procedure that closes the program when this window is closed
 
 
-            this.SizeChanged += ResizeGrid; //Resize the grid whenever the window is resized
+            this.SizeChanged += ResizeProcedure; //Resize the grid whenever the window is resized
             this.Controls.Add(gridMap);
 
 
@@ -42,8 +42,6 @@ namespace GridSagaPrototype
                 {
                     buttons[i, j] = new Button();
                     gridMap.Controls.Add(buttons[i, j]);
-                    buttons[i, j].Size = new Size(buttons[i, j].Parent.Width / buttons.GetLength(1), buttons[i, j].Parent.Height / buttons.GetLength(0));
-                    buttons[i, j].Location = new Point((buttons[i, j].Parent.Width / buttons.GetLength(1)) * j, (buttons[i, j].Parent.Height / buttons.GetLength(0)) * i);
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
                     buttons[i, j].BackColor = Color.Green;
                     buttons[i, j].Tag = new int[] { i, j }; 
@@ -52,7 +50,7 @@ namespace GridSagaPrototype
                }
             }
 
-            ResizeOnStart(); //Calls upon a procedure that resizes the window
+            ResizeGrid(); //Calls upon a procedure that resizes the window
         }
 
         private void closed(object sender, EventArgs e)
@@ -60,13 +58,13 @@ namespace GridSagaPrototype
             Application.Exit();
         }
 
-        private void ResizeGrid(object sender, EventArgs e)
+        private void ResizeProcedure(object sender, EventArgs e)
         {
-            ResizeOnStart();
+            ResizeGrid();
         }
 
 
-        private void ResizeOnStart() //this procedure will resize the objects on the form whenever the window is resized
+        private void ResizeGrid() //this procedure will resize the objects on the form whenever the window is resized
         {
             int scale = 66;
 
@@ -87,7 +85,6 @@ namespace GridSagaPrototype
 
             gridMap.Location = new Point(screenwidth / 2 - scaledwidth / 2, screenheight / 2 - scaledheight / 2);
             gridMap.Size = new Size(scaledwidth, scaledheight);
-            gridMap.BackColor = Color.Black;
 
             for (int i = 0; i < buttons.GetLength(0); i++)
             {
@@ -112,6 +109,17 @@ namespace GridSagaPrototype
             }
         }
 
+        private void makeGridGreen()
+        {
+            for (int i = 0; i < buttons.GetLength(0); i++)
+            {
+                for (int j = 0; j < buttons.GetLength(1); j++)
+                {
+                    buttons[i, j].BackColor = Color.Green;
+                }
+            }
+        }
+
         private void on_click(object sender, EventArgs e)
         {
             Button button = (sender as Button);
@@ -121,8 +129,7 @@ namespace GridSagaPrototype
             //Getting the list code goes here
             //-----------------------
             Globals.LastPosition = pos;
-
-            ResizeOnStart();
+            ResizeGrid();
         }
 
     }
