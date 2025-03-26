@@ -30,7 +30,7 @@ namespace GridSagaPrototype
 
         private void MainGame_Load(object sender, EventArgs e) //
         {
-            character[0] = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite);
+            character[0] = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite, true);
             this.FormClosed += closed; //Calls upon a procedure that closes the program when this window is closed
 
 
@@ -118,7 +118,7 @@ namespace GridSagaPrototype
                 {
                     if (c.getXPos() < buttons.GetLength(0) && c.getYPos() < buttons.GetLength(1))
                     {
-                        buttons[c.getXPos(), c.getYPos()].BackgroundImage = Resources.CharacterOneSprite; //change this to map a dictionary to character sprites
+                        buttons[c.getXPos(), c.getYPos()].BackgroundImage = c.getImage(); //change this to map a dictionary to character sprites
                     }
                 }
             }
@@ -150,10 +150,10 @@ namespace GridSagaPrototype
                 {
                     if (character[i] != null)
                     {
-                        if (character[i].getXPos() == pos[0] && character[i].getYPos() == pos[1]) //if tile is character move it.
+                        if (character[i].getXPos() == pos[0] && character[i].getYPos() == pos[1] && character[i].getFriendly()) //if tile is character move it.
                         {
                             Globals.lastCharacterID = i;
-                            map.moveSearch(pos[0], pos[1]);
+                            map.moveSearch(pos[0], pos[1], character[i]);
                             break;
                         }
                     }

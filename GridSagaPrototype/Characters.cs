@@ -16,7 +16,8 @@ namespace GridSagaPrototype
         private Image Sprite;
         private int xpos;
         private int ypos;
-        public Characters(int newHealth, int newAttack, int newSpeed,int startingPosX, int startingPosY, Image newSprite) { Health = newHealth; Attack = newAttack; Speed = newSpeed; Sprite = newSprite; xpos = startingPosX; ypos = startingPosY; }
+        private bool isFriendly;
+        public Characters(int newHealth, int newAttack, int newSpeed,int startingPosX, int startingPosY, Image newSprite, bool friendly) { Health = newHealth; Attack = newAttack; Speed = newSpeed; Sprite = newSprite; xpos = startingPosX; ypos = startingPosY; isFriendly = friendly; }
         
         public int getXPos()
         {
@@ -34,6 +35,30 @@ namespace GridSagaPrototype
         public void setYPos(int newYPos)
         {
             ypos = newYPos;
+        }
+        public Image getImage()
+        {
+            return Sprite;
+        }
+        public int getSpeed()
+        {
+            return Speed;
+        }
+        public int getAttack()
+        {
+            return Attack;
+        }
+        public int getHealth()
+        {
+            return Health;
+        }
+        public void addHealth(int health)
+        {
+            Health += health;
+        }
+        public bool getFriendly()
+        {
+            return isFriendly;
         }
     }
 }

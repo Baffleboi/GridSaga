@@ -35,45 +35,44 @@ namespace GridSagaPrototype
             TileArray[2, 3] = new Tile(2, 3, 100);
             TileArray[2, 3].tileColor = Color.Black;
 
+            TileArray[2, 4] = new Tile(2, 4, 100);
+            TileArray[2, 4].tileColor = Color.Black;
+
         }
 
         public ref Tile getTile(int i, int j) { return ref TileArray[i, j]; }
 
-        public void moveSearch(int X, int Y) //dijkstra with a move limit
+        public void moveSearch(int X, int Y, Characters character) //dijkstra with a move limit
         {
             Queue<Tile> queue = new Queue<Tile>();
-            queue.Enqueue(new Tile(X, Y, 1));
+            queue.Enqueue(TileArray[X,Y]);
             bool[,] visitedTiles = new bool[10,10]; // this makes a boolean 2d array of size 10x10 since 10 is the size of the map that will keep track of all visited tiles
             visitedTiles[X, Y] = true;
 
             while (queue.Count > 0)
             {
                 Tile currentTile = queue.Dequeue();
-                int x = currentTile.xCoord;
-                int y = currentTile.yCoord;
-                int moves = currentTile.distance;
 
-                if (moves >= 3)
-                {
-                    break;
-                }
-                else
 
-                for (int i = 0; i < 4; i++) //Bad idea, take the character clicked as a parameter and use its speed to determine the number of moves
+                for (int i = 0; i < character.getSpeed(); i+= currentTile.getMovementCost())
                 {
-                    if (x + MovementOptionsX[i] < 0 || x + MovementOptionsX[i] >= 10 || y + MovementOptionsY[i] < 0 || y + MovementOptionsY[i] >= 10)
+                    if (currentTile.getMovementCost() >= character.getSpeed())
+                    {
+                        break;
+                    }
+                    if (currentTile.xCoord + MovementOptionsX[i] < 0 || currentTile.xCoord + MovementOptionsX[i] >= 10 || currentTile.yCoord + MovementOptionsY[i] < 0 || currentTile.yCoord + MovementOptionsY[i] >= 10)
                     {
                         continue;
                     }
-                    int newXCoord = x + MovementOptionsX[i];
-                    int newYCoord = y + MovementOptionsY[i];
-                        //TileArray[newXCoord, newYCoord].tileColor = Color.Blue;
-                        currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
+                    int newXCoord = currentTile.xCoord + MovementOptionsX[i];
+                    int newYCoord = currentTile.yCoord + MovementOptionsY[i];
+                    //TileArray[newXCoord, newYCoord].tileColor = Color.Blue;
+                    currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
 
                     if (!visitedTiles[newXCoord, newYCoord])
                     {
                         visitedTiles[newXCoord, newYCoord] = true;
-                        queue.Enqueue(new Tile(newXCoord, newYCoord, moves + 1));
+                        queue.Enqueue(TileArray[newXCoord, newYCoord]);
                     }
                 }
             }

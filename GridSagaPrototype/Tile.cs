@@ -11,11 +11,10 @@ namespace GridSagaPrototype
     {
         public int xCoord;
         public int yCoord;
-        public int distance;
-        public Tile(int i, int j, int movementcost) { xCoord = i; yCoord = j; distance = movementcost; }
+        private int MovementCost;
+        public Tile(int i, int j, int movementcost) { xCoord = i; yCoord = j; MovementCost = movementcost; }
 
         public Color tileColor = Color.SeaGreen; 
-        private int MovementCost = 1;
         private Characters Entity;
 
         public ref Characters getEntity() { return ref Entity; }
