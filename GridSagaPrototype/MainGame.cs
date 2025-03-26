@@ -19,7 +19,8 @@ namespace GridSagaPrototype
         public Button[,] getButtons() { return buttons; }
         public Map map = new Map(10,10,1);
 
-        Characters playerOne = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite);
+        Characters[] character = new Characters[4];
+        
 
         public MainGame()
         {
@@ -29,6 +30,7 @@ namespace GridSagaPrototype
 
         private void MainGame_Load(object sender, EventArgs e) //
         {
+            character[0] = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite);
             this.FormClosed += closed; //Calls upon a procedure that closes the program when this window is closed
 
 
@@ -96,41 +98,71 @@ namespace GridSagaPrototype
                     buttons[i, j].Location = new Point((buttons[i, j].Parent.Width / buttons.GetLength(1)) * j, (buttons[i, j].Parent.Height / buttons.GetLength(0)) * i);
                     buttons[i, j].BackColor = map.getTile(i,j).getTileColor();
                     buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch;
+                    buttons[i, j].BackgroundImage = null;
                 }
             }
+            foreach (int[] move in map.currentPossibleMoves) //highlights the possible moves in blue
+            {
+                buttons[move[0], move[1]].BackColor = Color.Blue;
+            }
+
             if (Globals.LastPosition[0] < buttons.GetLength(0) && Globals.LastPosition[1] < buttons.GetLength(1))
             {
                 buttons[Globals.LastPosition[0], Globals.LastPosition[1]].BackColor = Color.Orange;
             }
 
-            if (playerOne.getXPos() < buttons.GetLength(0) && playerOne.getYPos() < buttons.GetLength(1)) 
+
+            foreach(Characters c in character) //place all characters into the map.
             {
-                buttons[playerOne.getXPos(), playerOne.getYPos()].BackgroundImage = Resources.CharacterOneSprite;
-            }
-        }
-        
-        private void makeGridGreen()
-        {
-            for (int i = 0; i < buttons.GetLength(0); i++)
-            {
-                for (int j = 0; j < buttons.GetLength(1); j++)
+                if (c != null)
                 {
-                    //buttons[i, j].BackColor = map.getTile(i, j).getTileColor();
+                    if (c.getXPos() < buttons.GetLength(0) && c.getYPos() < buttons.GetLength(1))
+                    {
+                        buttons[c.getXPos(), c.getYPos()].BackgroundImage = Resources.CharacterOneSprite; //change this to map a dictionary to character sprites
+                    }
                 }
             }
         }
+        
 
         private void on_click(object sender, EventArgs e)
         {
-            makeGridGreen();
+
             Button button = (sender as Button);
             int[] pos = button.Tag as int[]; //saves the position of the button clicked
-            map.moveSearch(pos[0], pos[1]);
-            //-----------------------
-            //Getting the list code goes here
-            //-----------------------
+            bool movemade = false;
+
+            foreach (int[] move in map.currentPossibleMoves) //checks if the move is possible
+            {
+                if (pos[0] == move[0] && pos[1] == move[1])
+                {
+                    character[Globals.lastCharacterID].setXPos(pos[0]); //makes the move
+                    character[Globals.lastCharacterID].setYPos(pos[1]);
+                    movemade = true;
+                    break;
+                }
+            }
+            map.currentPossibleMoves.Clear(); //clear possible moves (if it's clicking an empty square it deselects everything)
+
+            if (movemade == false) //if the click was not finding a move, then it could be a character click.
+            {
+                for (int i = 0; i < character.Length; i++)
+                {
+                    if (character[i] != null)
+                    {
+                        if (character[i].getXPos() == pos[0] && character[i].getYPos() == pos[1]) //if tile is character move it.
+                        {
+                            Globals.lastCharacterID = i;
+                            map.moveSearch(pos[0], pos[1]);
+                            break;
+                        }
+                    }
+                }
+            }
+
             Globals.LastPosition = pos;
             ResizeGrid();
+            
         }
 
     }
