@@ -15,6 +15,7 @@ namespace GridSagaPrototype
         public Tile[,] TileArray;
         private static int[] MovementOptionsX = { 1, -1, 0, 0 };
         private static int[] MovementOptionsY = { 0, 0, 1, -1 };
+        public List<int[]> currentPossibleMoves = new List<int[]>(); //Create a list to contain the current possible moves that can be made
         public Map(int width, int height, int cost)
         {
 
@@ -27,6 +28,12 @@ namespace GridSagaPrototype
 
                 }
             }
+
+            TileArray[2,2] = new Tile(2, 2, 100);
+            TileArray[2,2].tileColor = Color.Black;
+
+            TileArray[2, 3] = new Tile(2, 3, 100);
+            TileArray[2, 3].tileColor = Color.Black;
 
         }
 
@@ -52,7 +59,7 @@ namespace GridSagaPrototype
                 }
                 else
 
-                for (int i = 0; i < 4; i++)
+                for (int i = 0; i < 4; i++) //Bad idea, take the character clicked as a parameter and use its speed to determine the number of moves
                 {
                     if (x + MovementOptionsX[i] < 0 || x + MovementOptionsX[i] >= 10 || y + MovementOptionsY[i] < 0 || y + MovementOptionsY[i] >= 10)
                     {
@@ -60,7 +67,8 @@ namespace GridSagaPrototype
                     }
                     int newXCoord = x + MovementOptionsX[i];
                     int newYCoord = y + MovementOptionsY[i];
-                    TileArray[newXCoord, newYCoord].tileColor = Color.Blue;
+                        //TileArray[newXCoord, newYCoord].tileColor = Color.Blue;
+                        currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
 
                     if (!visitedTiles[newXCoord, newYCoord])
                     {
