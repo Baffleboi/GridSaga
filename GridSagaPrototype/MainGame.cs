@@ -115,7 +115,7 @@ namespace GridSagaPrototype
             {
                 for (int j = 0; j < buttons.GetLength(1); j++)
                 {
-                    buttons[i, j].BackColor = map.getTile(i, j).getTileColor();
+                    //buttons[i, j].BackColor = map.getTile(i, j).getTileColor();
                 }
             }
         }
