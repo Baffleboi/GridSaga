@@ -12,14 +12,13 @@ namespace GridSagaPrototype
 {
     public partial class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
-        private Tile[,] TileArray;
+        public Tile[,] TileArray;
         private static int[] MovementOptionsX = { 1, -1, 0, 0 };
         private static int[] MovementOptionsY = { 0, 0, 1, -1 };
         public Map(int width, int height, int cost)
         {
 
             TileArray = new Tile[width, height];
-            List<int[]> possibleMoves = new List<int[]>(); //a list of possible moves
             for (int i = 0; i < width; i++)
             {
                 for (int j = 0; j < height; j++)
@@ -28,7 +27,7 @@ namespace GridSagaPrototype
 
                 }
             }
-            TileArray[5, 5] = new Tile(7, 7, 999999999);
+
         }
 
         public ref Tile getTile(int i, int j) { return ref TileArray[i, j]; }
@@ -55,6 +54,10 @@ namespace GridSagaPrototype
 
                 for (int i = 0; i < 4; i++)
                 {
+                    if (x + MovementOptionsX[i] < 0 || x + MovementOptionsX[i] >= 10 || y + MovementOptionsY[i] < 0 || y + MovementOptionsY[i] >= 10)
+                    {
+                        continue;
+                    }
                     int newXCoord = x + MovementOptionsX[i];
                     int newYCoord = y + MovementOptionsY[i];
                     TileArray[newXCoord, newYCoord].tileColor = Color.Blue;

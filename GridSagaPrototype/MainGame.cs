@@ -43,7 +43,7 @@ namespace GridSagaPrototype
                     buttons[i, j] = new Button();
                     gridMap.Controls.Add(buttons[i, j]);
                     buttons[i, j].FlatStyle = FlatStyle.Flat;
-                    buttons[i, j].BackColor = Color.Green;
+                    buttons[i, j].BackColor = Color.SeaGreen;
                     buttons[i, j].Tag = new int[] { i, j }; 
                     buttons[i, j].Click += on_click;
 
@@ -108,20 +108,21 @@ namespace GridSagaPrototype
                 buttons[playerOne.getXPos(), playerOne.getYPos()].BackgroundImage = Resources.CharacterOneSprite;
             }
         }
-
+        
         private void makeGridGreen()
         {
             for (int i = 0; i < buttons.GetLength(0); i++)
             {
                 for (int j = 0; j < buttons.GetLength(1); j++)
                 {
-                    buttons[i, j].BackColor = Color.Green;
+                    buttons[i, j].BackColor = map.getTile(i, j).getTileColor();
                 }
             }
         }
 
         private void on_click(object sender, EventArgs e)
         {
+            makeGridGreen();
             Button button = (sender as Button);
             int[] pos = button.Tag as int[]; //saves the position of the button clicked
             map.moveSearch(pos[0], pos[1]);

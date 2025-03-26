@@ -14,7 +14,7 @@ namespace GridSagaPrototype
         public int distance;
         public Tile(int i, int j, int movementcost) { xCoord = i; yCoord = j; distance = movementcost; }
 
-        public Color tileColor = Color.Green; 
+        public Color tileColor = Color.SeaGreen; 
         private int MovementCost = 1;
         private Characters Entity;
 
