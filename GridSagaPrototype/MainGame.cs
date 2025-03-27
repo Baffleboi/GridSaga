@@ -142,7 +142,7 @@ namespace GridSagaPrototype
                     movemade = true;
                     break;
                 }
-            }
+            } //
             map.currentPossibleMoves.Clear(); //clear possible moves (if it's clicking an empty square it deselects everything)
 
             if (movemade == false) //if the click was not finding a move, then it could be a character click.
