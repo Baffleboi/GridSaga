@@ -33,11 +33,11 @@ namespace GridSagaPrototype
             TileArray[2,2] = new Tile(2, 2, 100);
             TileArray[2,2].tileColor = Color.Black;
 
-            TileArray[2, 3] = new Tile(2, 3, 100);
-            TileArray[2, 3].tileColor = Color.Black;
+            //TileArray[2, 3] = new Tile(2, 3, 100);
+            //TileArray[2, 3].tileColor = Color.Black;
 
-            TileArray[2, 4] = new Tile(2, 4, 100);
-            TileArray[2, 4].tileColor = Color.Black;
+            //TileArray[2, 4] = new Tile(2, 4, 100);
+            //TileArray[2, 4].tileColor = Color.Black;
             //-------------------------
         }
 
@@ -53,7 +53,9 @@ namespace GridSagaPrototype
             while (queue.Count > 0)
             {
                 Tile currentTile = queue.Dequeue();
-                if (currentTile.getMovementCost() >= character.getSpeed())
+                int moves = 2;
+                int movecost = currentTile.getMovementCost();
+                if (movecost >= moves)
                 {
                     break;
                 }
@@ -67,6 +69,7 @@ namespace GridSagaPrototype
                     int newXCoord = currentTile.xCoord + directionX[i];
                     int newYCoord = currentTile.yCoord + directionY[i];
                     currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
+                    movecost += currentTile.getMovementCost();
 
                     if (!visitedTiles[newXCoord, newYCoord])
                     {

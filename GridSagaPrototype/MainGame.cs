@@ -142,7 +142,7 @@ namespace GridSagaPrototype
                     movemade = true;
                     break;
                 }
-            } //
+            } 
             map.currentPossibleMoves.Clear(); //clear possible moves (if it's clicking an empty square it deselects everything)
 
             if (movemade == false) //if the click was not finding a move, then it could be a character click.
@@ -151,7 +151,7 @@ namespace GridSagaPrototype
                 {
                     if (character[i] != null)
                     {
-                        if (character[i].getXPos() == pos[0] && character[i].getYPos() == pos[1] && character[i].getFriendly()) //if tile is character move it.
+                        if (character[i].getXPos() == pos[0] && character[i].getYPos() == pos[1] && character[i].getFriendly()) //if tile has a friendly character move it.
                         {
                             Globals.lastCharacterID = i; //makes last character ID the one ID of the character that was clicked
                             map.moveSearch(pos[0], pos[1], character[i]);
