@@ -14,8 +14,8 @@ namespace GridSagaPrototype
     {
         public Tile[,] TileArray;
         //these are the directions that the character can move in
-        private static int[] directionX = { 1, -1, 0, 0 };
-        private static int[] directionY = { 0, 0, 1, -1 };
+        private static int[] directionX = { 0, 0, 1, -1 };
+        private static int[] directionY = { 1, -1, 0, 0 };
         public List<int[]> currentPossibleMoves = new List<int[]>(); //Create a list to contain the current possible moves that can be made
         public Map(int width, int height, int cost)
         {
@@ -49,12 +49,13 @@ namespace GridSagaPrototype
             queue.Enqueue(TileArray[X,Y]);
             bool[,] visitedTiles = new bool[10,10]; // this makes a boolean 2d array of size 10x10 since 10 is the size of the map that will keep track of all visited tiles
             visitedTiles[X, Y] = true;
+            int movecost = 0;
+            int moves = character.getSpeed() +10;
 
             while (queue.Count > 0)
             {
                 Tile currentTile = queue.Dequeue();
-                int moves = 2;
-                int movecost = currentTile.getMovementCost();
+                movecost += currentTile.getMovementCost();
                 if (movecost >= moves)
                 {
                     break;
@@ -69,7 +70,6 @@ namespace GridSagaPrototype
                     int newXCoord = currentTile.xCoord + directionX[i];
                     int newYCoord = currentTile.yCoord + directionY[i];
                     currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
-                    movecost += currentTile.getMovementCost();
 
                     if (!visitedTiles[newXCoord, newYCoord])
                     {
@@ -77,6 +77,7 @@ namespace GridSagaPrototype
                         queue.Enqueue(TileArray[newXCoord, newYCoord]);
                     }
                 }
+
             }
         }
 
