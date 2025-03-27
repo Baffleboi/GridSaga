@@ -13,8 +13,9 @@ namespace GridSagaPrototype
     public partial class Map //This classes purpose is to create a replica of the grid of buttons instead as a grid of class Tile so that all the code can be done without effecting the buttons directly
     {
         public Tile[,] TileArray;
-        private static int[] MovementOptionsX = { 1, -1, 0, 0 };
-        private static int[] MovementOptionsY = { 0, 0, 1, -1 };
+        //these are the directions that the character can move in
+        private static int[] directionX = { 1, -1, 0, 0 };
+        private static int[] directionY = { 0, 0, 1, -1 };
         public List<int[]> currentPossibleMoves = new List<int[]>(); //Create a list to contain the current possible moves that can be made
         public Map(int width, int height, int cost)
         {
@@ -28,7 +29,7 @@ namespace GridSagaPrototype
 
                 }
             }
-
+            //these are walls!!!
             TileArray[2,2] = new Tile(2, 2, 100);
             TileArray[2,2].tileColor = Color.Black;
 
@@ -37,7 +38,7 @@ namespace GridSagaPrototype
 
             TileArray[2, 4] = new Tile(2, 4, 100);
             TileArray[2, 4].tileColor = Color.Black;
-
+            //-------------------------
         }
 
         public ref Tile getTile(int i, int j) { return ref TileArray[i, j]; }
@@ -52,21 +53,19 @@ namespace GridSagaPrototype
             while (queue.Count > 0)
             {
                 Tile currentTile = queue.Dequeue();
-
-
-                for (int i = 0; i < character.getSpeed(); i+= currentTile.getMovementCost())
+                if (currentTile.getMovementCost() >= character.getSpeed())
                 {
-                    if (currentTile.getMovementCost() >= character.getSpeed())
-                    {
-                        break;
-                    }
-                    if (currentTile.xCoord + MovementOptionsX[i] < 0 || currentTile.xCoord + MovementOptionsX[i] >= 10 || currentTile.yCoord + MovementOptionsY[i] < 0 || currentTile.yCoord + MovementOptionsY[i] >= 10)
+                    break;
+                }
+
+                for (int i = 0; i < character.getSpeed(); i += currentTile.getMovementCost())
+                {
+                    if (currentTile.xCoord + directionX[i] < 0 || currentTile.xCoord + directionX[i] >= 10 || currentTile.yCoord + directionY[i] < 0 || currentTile.yCoord + directionY[i] >= 10)
                     {
                         continue;
                     }
-                    int newXCoord = currentTile.xCoord + MovementOptionsX[i];
-                    int newYCoord = currentTile.yCoord + MovementOptionsY[i];
-                    //TileArray[newXCoord, newYCoord].tileColor = Color.Blue;
+                    int newXCoord = currentTile.xCoord + directionX[i];
+                    int newYCoord = currentTile.yCoord + directionY[i];
                     currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
 
                     if (!visitedTiles[newXCoord, newYCoord])
