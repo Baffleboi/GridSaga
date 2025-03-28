@@ -31,7 +31,7 @@ namespace GridSagaPrototype
         private void MainGame_Load(object sender, EventArgs e) //
         {
             //-------------------------Declare the characters here
-            character[0] = new Characters(100, 2, 4, 4, 4, Resources.CharacterOneSprite, true);
+            character[0] = new Characters(100, 2, 3, 4, 4, Resources.CharacterOneSprite, true);
             //-------------------------
             this.FormClosed += closed; //Calls upon a procedure that closes the program when this window is closed
 
@@ -104,6 +104,7 @@ namespace GridSagaPrototype
             }
             foreach (int[] move in map.currentPossibleMoves) //highlights the possible moves in blue
             {
+
                 buttons[move[0], move[1]].BackColor = Color.Blue;
             }
 

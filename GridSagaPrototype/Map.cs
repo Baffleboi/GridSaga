@@ -49,19 +49,14 @@ namespace GridSagaPrototype
             queue.Enqueue(TileArray[X,Y]);
             bool[,] visitedTiles = new bool[10,10]; // this makes a boolean 2d array of size 10x10 since 10 is the size of the map that will keep track of all visited tiles
             visitedTiles[X, Y] = true;
-            int movecost = 0;
-            int moves = character.getSpeed() +10;
+            int moves = character.getSpeed();
 
             while (queue.Count > 0)
             {
                 Tile currentTile = queue.Dequeue();
-                movecost += currentTile.getMovementCost();
-                if (movecost >= moves)
-                {
-                    break;
-                }
+                int movecost = currentTile.getMovementCost();
 
-                for (int i = 0; i < character.getSpeed(); i += currentTile.getMovementCost())
+                for (int i = 0; i < 4; i++)
                 {
                     if (currentTile.xCoord + directionX[i] < 0 || currentTile.xCoord + directionX[i] >= 10 || currentTile.yCoord + directionY[i] < 0 || currentTile.yCoord + directionY[i] >= 10)
                     {
@@ -69,6 +64,15 @@ namespace GridSagaPrototype
                     }
                     int newXCoord = currentTile.xCoord + directionX[i];
                     int newYCoord = currentTile.yCoord + directionY[i];
+                    movecost = Math.Abs(character.getXPos() - newXCoord) + Math.Abs(character.getYPos() - newYCoord);
+                    if (movecost >= moves)
+                    {
+                        break;
+                    }
+                    if (TileArray[newXCoord,newYCoord].getMovementCost() > moves)
+                    {
+                        break;
+                    }
                     currentPossibleMoves.Add(new int[] { newXCoord, newYCoord });
 
                     if (!visitedTiles[newXCoord, newYCoord])
